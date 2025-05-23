@@ -1,7 +1,11 @@
 AS = arm-linux-gnueabi-as
 CC = arm-linux-gnueabi-gcc
 CFLAGS=-Wall -Wextra -Werror -z noexecstack
-NAME = arm-root/lib/libarmalloc.so
+
+QEMU_ROOT=qemu-root
+QEMU=qemu-arm
+
+NAME = $(QEMU_ROOT)/lib/libarmalloc.so
 
 TEST_DIR = ./tests/
 TEST_FILES = main.c
@@ -34,10 +38,13 @@ clean:
 	rm -rf $(OBJS_DIR)
 
 test: $(NAME)
-	arm-linux-gnueabi-gcc $(TEST) -L./arm-root/lib -larmalloc -o $(TEST_NAME)
+	arm-linux-gnueabi-gcc $(TEST) -L${QEMU_ROOT}/lib -larmalloc -o $(TEST_NAME)
+	$(QEMU) -L $(QEMU_ROOT) $(TEST_NAME)
 
 fclean: clean
 	rm -f $(NAME)
 	rm -f $(TEST_NAME)
 
 re: fclean all
+
+.PHONY: test
