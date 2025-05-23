@@ -2,5 +2,5 @@
 #include <stdio.h>
 
 int main() {
-    printf("%d\n", add(1, 2));
+    printf("%p\n", get_page());
 }

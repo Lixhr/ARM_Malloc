@@ -1,9 +1,9 @@
-AS = arm-linux-gnueabi-as
-CC = arm-linux-gnueabi-gcc
+AS = aarch64-linux-gnu-as
+CC = aarch64-linux-gnu-gcc-11
 CFLAGS=-Wall -Wextra -Werror -z noexecstack
 
 QEMU_ROOT=qemu-root
-QEMU=qemu-arm
+QEMU=qemu-aarch64
 
 NAME = $(QEMU_ROOT)/lib/libarmalloc.so
 
@@ -19,7 +19,6 @@ SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJS_DIR = ./objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC_FILES:.s=.o))
-
 
 
 $(NAME): $(OBJS)
@@ -38,7 +37,7 @@ clean:
 	rm -rf $(OBJS_DIR)
 
 test: $(NAME)
-	arm-linux-gnueabi-gcc $(TEST) -L${QEMU_ROOT}/lib -larmalloc -o $(TEST_NAME)
+	$(CC) $(TEST) -L${QEMU_ROOT}/lib -larmalloc -o $(TEST_NAME)
 	$(QEMU) -L $(QEMU_ROOT) $(TEST_NAME)
 
 fclean: clean
