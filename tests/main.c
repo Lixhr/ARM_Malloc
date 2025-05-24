@@ -1,6 +1,6 @@
 #include "../includes/armalloc.h"
 
 int main() {
-    printf("%p\n", get_struct());
+    printf("%d", ft_malloc(10));
     return 0;
 }

@@ -1,6 +1,6 @@
 {
     global:
-        get_struct;
+        ft_malloc;
     local:
         *;
 };

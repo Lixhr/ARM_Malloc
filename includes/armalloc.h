@@ -3,6 +3,6 @@
 # include <unistd.h>
 # include <stdio.h>
 
-extern void *get_struct();
+extern void *ft_malloc(size_t size);
 
 #endif

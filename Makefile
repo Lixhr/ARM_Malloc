@@ -15,7 +15,9 @@ TEST_NAME = ./test
 
 SRC_DIR = ./srcs/
 SRC_FILES = test.s \
-			global.s
+			global.s \
+			malloc.s \
+			init_struct.s 
 
 OBJS_DIR = ./objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC_FILES:.s=.o))
@@ -39,7 +41,11 @@ clean:
 
 test: $(NAME)
 	$(CC) $(TEST) -L${QEMU_ROOT}/lib -larmalloc -o $(TEST_NAME)
-	$(QEMU) -L $(QEMU_ROOT) ./test -g 1234
+	$(QEMU) -L $(QEMU_ROOT) ./test
+
+gdb: $(NAME)
+	$(CC) $(TEST) -L${QEMU_ROOT}/lib -larmalloc -o $(TEST_NAME)
+	$(QEMU) -g 1234 -L $(QEMU_ROOT) ./test
 
 fclean: clean
 	rm -f $(NAME)
