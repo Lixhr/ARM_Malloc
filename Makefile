@@ -6,7 +6,7 @@ ASFLAGS = -march=armv8-a
 QEMU_ROOT = qemu-root
 QEMU = qemu-aarch64
 
-NAME = $(QEMU_ROOT)/lib/libarmalloc.so
+NAME = libarmalloc.so
 
 TEST_DIR = ./tests/
 TEST_FILES = main.c
@@ -22,11 +22,12 @@ SRC_FILES = test.s \
 OBJS_DIR = ./objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC_FILES:.s=.o))
 
-$(QEMU_ROOT)/lib:
-	mkdir -p $@
 
-$(NAME): $(OBJS) | $(QEMU_ROOT)/lib
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -shared -o $@ $^ -Wl,--version-script=export.map
+
+$(TEST_NAME): $(TEST) $(NAME)
+	$(CC) $(CFLAGS) -g  -o $@ $(TEST) -L. -larmalloc
 
 all: $(NAME)
 
@@ -39,13 +40,11 @@ $(OBJS_DIR)%.o: $(SRC_DIR)%.s | $(OBJS_DIR)
 clean:
 	rm -rf $(OBJS_DIR)
 
-test: $(NAME)
-	$(CC) $(TEST) -L${QEMU_ROOT}/lib -larmalloc -o $(TEST_NAME)
-	$(QEMU) -L $(QEMU_ROOT) ./test
+qemu:
+	./qemu/skill-qemu-alpine/aarch64/run.sh
 
-gdb: $(NAME)
-	$(CC) $(TEST) -L${QEMU_ROOT}/lib -larmalloc -o $(TEST_NAME)
-	$(QEMU) -g 1234 -L $(QEMU_ROOT) ./test
+send: $(TEST_NAME)
+	cd qemu ; ./send.sh
 
 fclean: clean
 	rm -f $(NAME)

@@ -2,3 +2,8 @@
 *.so
 test
 *.out
+core
+qemu/share/test
+*.img*
+*vmlinuz*
+*.qcow2
