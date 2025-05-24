@@ -1,6 +1,6 @@
 #include "../includes/armalloc.h"
-#include <stdio.h>
 
 int main() {
-    printf("%p\n", get_page());
+    printf("%p\n", get_struct());
+    return 0;
 }
