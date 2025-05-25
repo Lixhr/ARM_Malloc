@@ -1,6 +1,6 @@
-AS = aarch64-linux-gnu-as
 CC = aarch64-linux-gnu-gcc
-CFLAGS = -Wall -Wextra -Werror -z noexecstack -fPIC
+
+AS = aarch64-linux-gnu-as	
 ASFLAGS = -march=armv8-a
 
 QEMU_ROOT = qemu-root
@@ -12,30 +12,35 @@ TEST_DIR = ./tests/
 TEST_FILES = main.c
 TEST = $(addprefix $(TEST_DIR), $(TEST_FILES))
 TEST_NAME = ./test
+CFLAGS = -Wall -Wextra -Werror -z noexecstack -fPIC
 
 SRC_DIR = ./srcs/
-SRC_FILES = test.s \
-			global.s \
-			malloc.s \
-			init_struct.s 
+SRC_FILES = test.S \
+			global.S \
+			malloc.S \
+			init_struct.S \
+			map.S
 
 OBJS_DIR = ./objs/
-OBJS = $(addprefix $(OBJS_DIR), $(SRC_FILES:.s=.o))
+OBJS = $(addprefix $(OBJS_DIR), $(SRC_FILES:.S=.o))
 
-
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -shared -o $@ $^ -Wl,--version-script=export.map
+$(NAME): $(OBJS_DIR) $(OBJS)
+	$(CC) $(CFLAGS) -shared -o $@ $(OBJS) -Wl,--version-script=export.map
 
 $(TEST_NAME): $(TEST) $(NAME)
-	$(CC) $(CFLAGS) -g  -o $@ $(TEST) -L. -larmalloc
+	$(CC) $(CFLAGS) -g -o $@ $(TEST) -L. -larmalloc
 
 all: $(NAME)
 
-$(OBJS_DIR):
-	mkdir -p $@
 
-$(OBJS_DIR)%.o: $(SRC_DIR)%.s | $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $< 
+
+$(OBJS_DIR):
+	mkdir $(OBJS_DIR)
+
+
+$(OBJS_DIR)%.o: $(SRC_DIR)%.S | $(OBJS_DIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
 
 clean:
 	rm -rf $(OBJS_DIR)
