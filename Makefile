@@ -19,7 +19,8 @@ SRC_FILES = test.S \
 			global.S \
 			malloc.S \
 			init_struct.S \
-			map.S
+			map.S \
+			alloc_chunk.S
 
 OBJS_DIR = ./objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC_FILES:.S=.o))

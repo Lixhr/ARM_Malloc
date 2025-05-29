@@ -10,9 +10,7 @@ HEAP_STRUCT:
 /// ---------------------------------
 /// | PAGE STRUCTURE                |
 /// ---------------------------------
-/// [   prev_page  ][   next_page   ]
-/// [   top_chunk  ][]
-/// [            chunks             ]
+/// [   next_page   ][   top_chunk  ]
 /// [            chunks             ]
 /// [            chunks             ]
 /// ...
@@ -26,7 +24,13 @@ HEAP_STRUCT:
 /// [   largebins  ][  unsortedbin  ]
 /// [     mutex    ][   page_head   ]
 /// [   page_size  ][  struct_init  ]
-// maybe other data
 
 
 
+
+/// -----------------------------------------
+/// | ALLOCATED                             |
+/// -----------------------------------------
+/// [     prev_size   ][ curr_size | mmaped ]
+/// [               data                    ]
+/// ...

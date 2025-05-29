@@ -10,11 +10,10 @@
 # define OFF_PAGE_SIZE   0x30
 # define OFF_STRUCT_INIT 0x38
 
-# define PREV_PAGE       0x0
-# define NEXT_PAGE       0x8
-# define TOP_CHUNK       0x10
+# define NEXT_PAGE       0x0
+# define TOP_CHUNK       0x8
 
-# define TOP_CHUNK_INIT  0x20
+# define TOP_CHUNK_INIT  0x10
 
 
 # define MAP_PROT        0x01 | 0x02

@@ -9,7 +9,19 @@ ft_malloc:
     stp x29, x30, [sp, #-16]!
     mov x29, sp
 
-    bl get_struct
+    str x0, [sp, #-0x10]!
 
-    ldp x29, x30, [sp], #16
+    bl get_struct
+    cmp x0, #0
+    beq .ret
+    str x0, [sp, #0x8]
+
+    ldr x0, [sp]
+    bl get_aligned_size
+    str x0, [sp]
+
+
+.ret:
+    add sp, sp, #0x10
+    ldp x29, x30, [sp], #0x10
     ret
