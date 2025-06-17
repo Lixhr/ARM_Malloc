@@ -1,9 +1,9 @@
 #include "consts.S"
 
 .section .text
-.global get_aligned_size
+.global get_aligned_size, get_chunk_size
 .type get_aligned_size, %function
-.type get_chunk_type, %function
+.type get_chunk_size, %function
 
 // aligned = (size + 15) & ~15
 
@@ -30,14 +30,25 @@ get_aligned_size:
     ldp x29, x30, [sp], #0x10
     ret
 
-
-get_chunk_type:
+// (size+0x10) -> returns the real chunk size
+get_chunk_size:
     stp x29, x30, [sp, #-0x10]!
     mov x29, sp
 
+    bl get_aligned_size
+    add x0, x0, #OFF_DATA // adding the header's size
+
+    cmp x0 , #SMALLBIN_SIZE
+    b.gt  .ret // mmaped page, no need to round
+
     cmp x0, #FASTBIN_SIZE
+    b.gt .is_smallbin // greater than fastbin -> smallbin
 
+    mov x0, #FASTBIN_SIZE
+    b .ret_size
 
-
+.is_smallbin:
+    mov x0, #SMALLBIN_SIZE
+.ret_size:
     ldp x29, x30, [sp], #0x10
     ret

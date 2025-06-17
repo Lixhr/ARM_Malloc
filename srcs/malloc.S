@@ -5,6 +5,8 @@
 .type ft_malloc, %function
 
 
+
+
 ft_malloc:
     stp x29, x30, [sp, #-16]!
     mov x29, sp
@@ -17,11 +19,9 @@ ft_malloc:
     str x0, [sp, #0x8]
 
     ldr x0, [sp]
-    bl get_aligned_size
-    str x0, [sp]
 
-    add x0, x0, #OFF_DATA // adding the header's size in the final
- 
+    bl get_chunk_size // get the corresponding binlist size
+    str x0, [sp]
 
 
 
