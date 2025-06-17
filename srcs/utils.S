@@ -42,19 +42,21 @@ create_new_chunk:
     add x4, x0, x2 // top_chunk_limit
 
     ldr x3, [x0, #TOP_CHUNK]
-    mov x3, x5 // store current top chunk
-
-    add x3, x3,  x1
-    cmp x3, x4 // will the new top_chunk overlap limit ?
+    mov x5, x3 // store current top chunk
+    add x5, x5, x1
+    cmp x5, x4 // if (top_chunk + chunk_size > page_pointer + page_size)
     b.gt .end_of_page
 
-    str x3, [x0, #TOP_CHUNK] // store new top chunk
-    mov x5, x0
+    str x5, [x0, #TOP_CHUNK] // store new top chunk
+    mov x3, x0
+
+
+
+    
     b .ret_chunk
 
 .end_of_page:
     mov x0, #0
 .ret_chunk:
-    add sp, sp, #0x10
     ldp x29, x30, [sp], #0x10
     ret

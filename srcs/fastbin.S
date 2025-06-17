@@ -17,6 +17,6 @@ fastbin:
 
     bl create_new_chunk
 
-    add sp, sp, #0x20
+    add sp, sp, #0x10
     ldp x29, x30, [sp], #0x10
     ret
