@@ -42,17 +42,18 @@ create_new_chunk:
     add x4, x0, x2 // top_chunk_limit
 
     ldr x3, [x0, #TOP_CHUNK]
-    mov x5, x3 // store current top chunk
+    mov x5, x3
     add x5, x5, x1
-    cmp x5, x4 // if (top_chunk + chunk_size > page_pointer + page_size)
+    cmp x5, x4 // if (top_chunk + chunk_size > page_begin + page_size)
     b.gt .end_of_page
-
     str x5, [x0, #TOP_CHUNK] // store new top chunk
-    mov x3, x0
 
+    mov x3, x0 // current chunk
 
+    mov x2, #0
+    bl forge_header
 
-    
+    add x0, x0, #0x10 // the user should not be aware of the chunk's metadata
     b .ret_chunk
 
 .end_of_page:

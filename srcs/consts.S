@@ -55,10 +55,13 @@
 
 # define OFF_DATA 0x10 // from 0 to data
 
+# define OFF_CURR_SIZE 0x0
+# define OFF_FLAGS 0x8
+
 /// -----------------------------------------
 /// | ALLOCATED                             |
 /// -----------------------------------------
-/// [     curr_size    |      mmaped        ]
+/// [     curr_size    |      mmaped        ] <- flags?
 /// [               data                    ]
 /// ...
 
