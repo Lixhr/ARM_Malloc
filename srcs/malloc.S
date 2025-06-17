@@ -5,8 +5,6 @@
 .type ft_malloc, %function
 
 
-
-
 ft_malloc:
     stp x29, x30, [sp, #-16]!
     mov x29, sp
@@ -19,12 +17,11 @@ ft_malloc:
     str x0, [sp, #0x8]
 
     ldr x0, [sp]
-
-    bl get_chunk_size // get the corresponding binlist size
+    bl get_chunk_size // get the final chunk size
     str x0, [sp]
 
-
-
+    ldr x0, [sp, #0x8]
+    bl fastbin
 
 .ret:
     add sp, sp, #0x10

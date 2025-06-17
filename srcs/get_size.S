@@ -30,7 +30,9 @@ get_aligned_size:
     ldp x29, x30, [sp], #0x10
     ret
 
-// (size+0x10) -> returns the real chunk size
+
+
+// (size), returns the final chunk size
 get_chunk_size:
     stp x29, x30, [sp, #-0x10]!
     mov x29, sp

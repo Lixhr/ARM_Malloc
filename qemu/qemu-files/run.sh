@@ -9,4 +9,4 @@ qemu-system-aarch64 -m 512 -M virt -cpu cortex-a57 -kernel ./vmlinuz-5.10.0-26-a
                     -initrd ./initrd.img-5.10.0-26-arm64 \
                     -append "console=ttyAMA0 debug root=/dev/vda net.ifnames=0" \
                     -hda ./debian-bullseye-arm64.qcow2 -nographic \
-                    -nic user,model=virtio-net-pci,hostfwd=tcp::5555-:22
+                    -nic user,model=virtio-net-pci,hostfwd=tcp::1234-:1234,hostfwd=tcp::5555-:22
