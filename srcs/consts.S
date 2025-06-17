@@ -1,6 +1,35 @@
 #ifndef CONSTS_H
 # define CONSTS_H
 
+
+
+# define TOP_CHUNK_INIT  0x10
+
+
+# define MAP_PROT        0x01 | 0x02
+# define MAP_FLAGS       0x20 | 0x02
+
+# define FASTBIN_SIZE    0x60
+# define SMALLBIN_SIZE   0x200
+
+
+/// ---------------------------------
+
+# define NEXT_PAGE       0x0
+# define TOP_CHUNK       0x8
+
+/// ---------------------------------
+/// | PAGE STRUCTURE                |
+/// ---------------------------------
+/// [   next_page   ][   top_chunk  ]
+/// [            chunks             ]
+/// [            chunks             ]
+/// ...
+
+/// ---------------------------------
+
+
+
 # define OFF_FASTBIN     0x00
 # define OFF_SMALLBIN    0x08
 # define OFF_LARGEBIN    0x10
@@ -10,14 +39,30 @@
 # define OFF_PAGE_SIZE   0x30
 # define OFF_STRUCT_INIT 0x38
 
-# define NEXT_PAGE       0x0
-# define TOP_CHUNK       0x8
+/// ---------------------------------
+/// | HEAP_STRUCT                   |
+/// ---------------------------------
+/// [   fastbins   ][   smallbins   ]
+/// [   largebins  ][  unsortedbin  ]
+/// [     mutex    ][   page_head   ]
+/// [   page_size  ][  struct_init  ]
 
-# define TOP_CHUNK_INIT  0x10
+
+/// FASTBIN   =  0x60
+/// SMALLBIN  =  0x200
+/// LARGEBIN  =  MMAPED
 
 
-# define MAP_PROT        0x01 | 0x02
-# define MAP_FLAGS       0x20 | 0x02
+
+# define OFF_DATA 0x10 // from 0 to data
+
+/// -----------------------------------------
+/// | ALLOCATED                             |
+/// -----------------------------------------
+/// [     curr_size    |      mmaped        ]
+/// [               data                    ]
+/// ...
+
 
 
 #endif

@@ -20,6 +20,11 @@ ft_malloc:
     bl get_aligned_size
     str x0, [sp]
 
+    add x0, x0, #OFF_DATA // adding the header's size in the final
+ 
+
+
+
 
 .ret:
     add sp, sp, #0x10
