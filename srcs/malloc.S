@@ -17,14 +17,11 @@ ft_malloc:
     str x0, [sp, #0x8]
 
     ldr x0, [sp]
-    bl get_aligned_size
+    bl get_chunk_size // get the final chunk size
     str x0, [sp]
 
-    add x0, x0, #OFF_DATA // adding the header's size in the final
- 
-
-
-
+    ldr x0, [sp, #0x8]
+    bl fastbin
 
 .ret:
     add sp, sp, #0x10
