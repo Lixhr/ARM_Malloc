@@ -14,16 +14,19 @@ TEST = $(addprefix $(TEST_DIR), $(TEST_FILES))
 TEST_NAME = ./test
 CFLAGS = -Wall -Wextra -Werror -z noexecstack -fPIC
 
-SRC_DIR = ./srcs/
-SRC_FILES = test.S \
-			global.S \
-			malloc.S \
-			init_struct.S \
-			map.S \
-			get_size.S \
-			utils.S \
-			header.S \
-			binlists.S 
+SRC_DIR = srcs/
+MALLOC_DIR 		= malloc/
+MALLOC_FILES 	= test.S \
+				global.S \
+				malloc.S \
+				init_struct.S \
+				map.S \
+				get_size.S \
+				utils.S \
+				header.S \
+				binlists.S 
+
+SRC_FILES = $(addprefix $(MALLOC_DIR), $(MALLOC_FILES))
 
 OBJS_DIR = ./objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC_FILES:.S=.o))
@@ -39,7 +42,7 @@ all: $(NAME)
 
 
 $(OBJS_DIR):
-	mkdir $(OBJS_DIR)
+	mkdir -p $(OBJS_DIR)/$(MALLOC_DIR)
 
 
 $(OBJS_DIR)%.o: $(SRC_DIR)%.S | $(OBJS_DIR)
