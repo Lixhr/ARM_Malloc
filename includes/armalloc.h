@@ -3,6 +3,7 @@
 # include <unistd.h>
 # include <stdio.h>
 
-extern void *ft_malloc(size_t size);
+extern void     *ft_malloc(size_t size);
+void            ft_free(void *p);
 
 #endif

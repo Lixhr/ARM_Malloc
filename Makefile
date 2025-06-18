@@ -12,7 +12,7 @@ TEST_DIR = ./tests/
 TEST_FILES = main.c
 TEST = $(addprefix $(TEST_DIR), $(TEST_FILES))
 TEST_NAME = ./test
-CFLAGS = -Wall -Wextra -Werror -z noexecstack -fPIC
+CFLAGS = -Wall -Wextra -Werror -z noexecstack -fPIC -I./includes
 
 SRC_DIR = srcs/
 MALLOC_DIR 		= malloc/
@@ -26,7 +26,13 @@ MALLOC_FILES 	= test.S \
 				header.S \
 				binlists.S 
 
+
+FREE_DIR 		= free/
+FREE_FILES		= free.S \
+				  binlists.S
+
 SRC_FILES = $(addprefix $(MALLOC_DIR), $(MALLOC_FILES))
+SRC_FILES += $(addprefix $(FREE_DIR), $(FREE_FILES))
 
 OBJS_DIR = ./objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC_FILES:.S=.o))
@@ -43,6 +49,7 @@ all: $(NAME)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)/$(MALLOC_DIR)
+	mkdir -p $(OBJS_DIR)/$(FREE_DIR)
 
 
 $(OBJS_DIR)%.o: $(SRC_DIR)%.S | $(OBJS_DIR)

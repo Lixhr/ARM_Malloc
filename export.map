@@ -1,6 +1,7 @@
 {
     global:
         ft_malloc;
+        ft_free;
     local:
         *;
 };

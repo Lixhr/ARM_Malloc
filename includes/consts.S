@@ -15,7 +15,7 @@
 
 /// ---------------------------------
 
-# define NEXT_PAGE           0x0
+# define NEXT_PAGE         0x0
 # define TOP_CHUNK         0x8
 # define CHUNK_ALLOCATED   0xc
 /// ----------------------------------------------------------
@@ -24,8 +24,6 @@
 /// [         next_page         ][  off_top_chunk  | count  ]
 /// [                        chunks                         ]
 /// [                        chunks                         ]
-
-
 
 
 # define OFF_FASTBIN     0x00
@@ -55,12 +53,13 @@
 # define OFF_DATA 0x10 // from 0 to data
 
 # define OFF_CURR_SIZE 0x0
-# define OFF_FLAGS 0x8
+# define OFF_MMAPED 0x8
+# define OFF_FREED 0xc
 
 /// -----------------------------------------
 /// | ALLOCATED                             |
 /// -----------------------------------------
-/// [     curr_size    |      mmaped        ] <- flags?
+/// [     curr_size    |  mmaped  |  freed  ]
 /// [               data                    ]
 /// ...
 
@@ -72,7 +71,7 @@
 /// -----------------------------------------
 /// | FREED                                 |
 /// -----------------------------------------
-/// [     curr_size    |      mmaped        ]
+/// [     curr_size    |  mmaped  |  freed  ]
 /// [       prev       |        next        ]
 /// ...
 
