@@ -15,17 +15,16 @@
 
 /// ---------------------------------
 
-# define NEXT_PAGE       0x0
-# define TOP_CHUNK       0x8
+# define NEXT_PAGE           0x0
+# define TOP_CHUNK         0x8
+# define CHUNK_ALLOCATED   0xc
+/// ----------------------------------------------------------
+/// | PAGE STRUCTURE                                         |
+/// ---------------------------------------------------------
+/// [         next_page         ][  off_top_chunk  | count  ]
+/// [                        chunks                         ]
+/// [                        chunks                         ]
 
-/// ---------------------------------
-/// | PAGE STRUCTURE                |
-/// ---------------------------------
-/// [   next_page   ][   top_chunk  ]
-/// [            chunks             ]
-/// [            chunks             ]
-/// ...
-/// ---------------------------------
 
 
 

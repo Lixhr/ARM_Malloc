@@ -23,7 +23,7 @@ SRC_FILES = test.S \
 			get_size.S \
 			utils.S \
 			header.S \
-			fastbin.S 
+			binlists.S 
 
 OBJS_DIR = ./objs/
 OBJS = $(addprefix $(OBJS_DIR), $(SRC_FILES:.S=.o))

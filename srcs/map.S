@@ -43,8 +43,9 @@ fill_page_data:
     stp x29, x30, [sp, #-16]!
     mov x29, sp
 
-    add x2, x0, #TOP_CHUNK_INIT // init top-chunk pointer
-    str x2, [x0, #TOP_CHUNK]
+    
+    mov x5, 0x10
+    str x5, [x0, 0x8]
 
     ldr x21, [x1, #OFF_PAGE_HEAD]   // x21 = struct->head
     str x21, [x0, #NEXT_PAGE]       // page->next = x21 = struct->head

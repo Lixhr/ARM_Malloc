@@ -1,11 +1,11 @@
 #include "consts.S"
 
 .section .text
-.global fastbin
-.type fastbin, %function
+.global do_sized_malloc
+.type do_sized_malloc, %function
 
 // (MALLOC_STRUCT)
-fastbin:
+do_sized_malloc:
     stp x29, x30, [sp, #-0x10]!
     mov x29, sp
 

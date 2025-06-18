@@ -21,7 +21,7 @@ ft_malloc:
     str x0, [sp]
 
     ldr x0, [sp, #0x8]
-    bl fastbin
+    bl do_sized_malloc
 
 .ret:
     add sp, sp, #0x10

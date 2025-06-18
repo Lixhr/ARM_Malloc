@@ -34,24 +34,32 @@ pop_from_binlist:
     ldp x29, x30, [sp], #0x10
     ret
 
-// (page_pointer, chunk_size, page_size)
+
+
+// (page_pointer, chunk_size, page_size) 
 create_new_chunk:
     stp x29, x30, [sp, #-0x10]!
     mov x29, sp
 
-    add x4, x0, x2 // top_chunk_limit
 
-    ldr x3, [x0, #TOP_CHUNK]
-    mov x5, x3
-    add x5, x5, x1
-    cmp x5, x4 // if (top_chunk + chunk_size > page_begin + page_size)
+    ldr w3, [x0, #TOP_CHUNK] // get current top_chunk offset
+    mov w5, w3
+    add w5, w5, w1
+    cmp w5, w2 // if (top_chunk + size > page_size) -> overflow
     b.gt .end_of_page
-    str x5, [x0, #TOP_CHUNK] // store new top chunk
 
-    mov x3, x0 // current chunk
 
-    mov x2, #0
+    str w5, [x0, #TOP_CHUNK] // store new top chunk
+
+    ldr w6, [x0, #CHUNK_ALLOCATED]
+    add w6, w6, 1
+    str w6, [x0, #CHUNK_ALLOCATED] // update chunk counter
+
+    add x0, x0, w3, uxtw // current chunk
+
+    mov x2, #0 // is_mapped
     bl forge_header
+
 
     add x0, x0, #0x10 // the user should not be aware of the chunk's metadata
     b .ret_chunk
