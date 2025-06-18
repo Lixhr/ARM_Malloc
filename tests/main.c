@@ -1,14 +1,14 @@
 #include "../includes/armalloc.h"
+#include <string.h>
 
 int main() {
-    char *test1 = ft_malloc(0x50);
-    char *test2 = ft_malloc(0x50);
 
-    printf("1: %p\n", test1);
-    printf("2: %p\n", test2);
+    for (size_t i = 0 ; i < 1000; i ++) {
+        printf("2: %p\n", ft_malloc(0x50));
+    }
 
-    sprintf("AAAAA", test1);
-    sprintf("BBBBB", test2);
+
+
 
 
     return 0;

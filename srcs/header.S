@@ -12,6 +12,5 @@ forge_header:
     str x1, [x0, #OFF_CURR_SIZE]
     str x2, [x0, #OFF_FLAGS]
 
-    add sp, sp, #0x10
     ldp x29, x30, [sp], #0x10
     ret
