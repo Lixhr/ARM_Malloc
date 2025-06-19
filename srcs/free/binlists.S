@@ -11,7 +11,7 @@ do_binlist_free:
 
     cmp x2, #FASTBIN_SIZE
     b.le .is_fastbin
-    add x1, x1, #OFF_SMALLBIN
+    add x0, x0, #OFF_SMALLBIN
 .is_fastbin:
     ldr x4, [x0] // current head
     cmp x4, #0
