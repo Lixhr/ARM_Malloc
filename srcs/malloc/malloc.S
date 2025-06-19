@@ -29,7 +29,8 @@ ft_malloc:
     ldr x1, [sp]
     bl do_sized_malloc
     cmp x0, #0
-    b.ne ret
+    b.ne .ret
+
 
 .ret:
     add sp, sp, #0x10

@@ -1,15 +1,19 @@
 #include "../includes/armalloc.h"
 #include <string.h>
+#include <stdlib.h>
 
 int main() {
 
-    for (size_t i = 0 ; i < 0x1f; i ++) {
-        char *p = ft_malloc(0x90);
-        if (p) {
-            strcpy(p,  "AAAAA");
-        }
-        printf(">> %p\n", p );
+    char *p1 = ft_malloc(0x40);
+
+    while (p1) {
+
+        strcpy(p1, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        p1 = ft_malloc(0x40);
+        printf("%p\n", p1);
+
     }
+
 
 
     return 0;
