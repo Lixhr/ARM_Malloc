@@ -35,8 +35,8 @@ ft_free:
 
 
     // small chunks goes into binlists
-    add x0, x0, #OFF_FASTBIN
-    ldr x1, [sp, 0x10]
+    ldr x1, [sp, 0x20]
+    ldr x2, [sp]
     bl do_binlist_free
 
 .big_chunk: // bigger chunks should be on unsortedbin, or on mmaped bins.
