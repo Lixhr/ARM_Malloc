@@ -12,6 +12,8 @@ int main() {
     // }
 
     char *p1 = ft_malloc(0x60);
+            // strcpy(p,  "AAAAA");
+
     char *p2 = ft_malloc(0x60);
     char *p3 = ft_malloc(0x60);
     char *p4 = ft_malloc(0x60);

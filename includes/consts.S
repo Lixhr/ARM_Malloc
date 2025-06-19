@@ -65,8 +65,8 @@
 
 
 
-# define OFF_PREV 0x10
-# define OFF_NEXT 0x18
+# define OFF_PREV 0x0
+# define OFF_NEXT 0x8
 
 /// -----------------------------------------
 /// | FREED                                 |

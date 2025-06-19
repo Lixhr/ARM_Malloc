@@ -9,15 +9,16 @@ do_binlist_free:
     stp x29, x30, [sp, #-16]!
     mov x29, sp
 
-    str xzr, [x1, #OFF_PREV] // chunk->prev = NULL
-
-    ldr x3, [x0]
-    str x3, [x1, #OFF_NEXT] // chunk->next = head
-
+    ldr x3, [x0] // current head
     cmp x3, #0
-    b.eq .ret // avoid null ptr dereference
+    b.eq .no_head // avoid null ptr dereference
 
-    str x1, [x3, #OFF_PREV] // head->prev = chunk
+    str x1, [x3, #OFF_PREV] // old->prev = curr
+
+.no_head:
+    str x3, [x1, #OFF_NEXT] // curr->next = old | NULL
+    str xzr, [x1, #OFF_PREV] // curr->prev = NULL
+
     str x1, [x0] // update head
 .ret:
     ldp x29, x30, [sp], #0x10
