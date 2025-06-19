@@ -29,7 +29,6 @@ ft_free:
     ldr x1, [sp, 0x10]
     bl do_binlist_free
 
-//    ldp w1, w2, [x0, ]
 
 .invalid_free:
 .ret:

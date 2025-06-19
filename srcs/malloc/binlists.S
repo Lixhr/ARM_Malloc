@@ -1,8 +1,9 @@
 #include "consts.S"
 
 .section .text
-.global do_sized_malloc
+.global do_sized_malloc, pop_from_binlist
 .type do_sized_malloc, %function
+.type pop_from_binlist, %function
 
 // (MALLOC_STRUCT)
 do_sized_malloc:
