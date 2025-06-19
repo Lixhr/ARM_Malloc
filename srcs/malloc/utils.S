@@ -20,17 +20,18 @@ pop_from_binlist:
     add x1, x1, 0x10 // get the corresponding binlist pointer 
 .is_fastbin:
 
-    str x0, [x1] // dereference the head
+    ldr x0, [x1] // dereference the head
     cmp x0, #0
     b.eq .ret // nothing in binlist, ret 0
 
     ldr x3, [x0, #OFF_NEXT] 
     str x3, [x1] // head = curr->next
 
+    cmp x3, #0
+    b.eq .ret
     str xzr, [x3] // curr->prev = NULL
 
 .ret:
-    add sp, sp, #0x10
     ldp x29, x30, [sp], #0x10
     ret
 

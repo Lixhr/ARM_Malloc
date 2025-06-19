@@ -20,7 +20,16 @@ ft_malloc:
     bl get_chunk_size // get the final chunk size
     str x0, [sp]
 
+    ldr x1, [sp, #0x8]
+    bl pop_from_binlist // sized chunks, check for freeds
+    cmp x0, #0
+    b.ne .ret
+
+
+
+
     ldr x0, [sp, #0x8]
+    ldr x1, [sp]
     bl do_sized_malloc
 
 .ret:
