@@ -9,8 +9,8 @@
 # define MAP_PROT        0x01 | 0x02
 # define MAP_FLAGS       0x20 | 0x02
 
-# define FASTBIN_SIZE    0x60
-# define SMALLBIN_SIZE   0x200
+# define FASTBIN_SIZE    0x50
+# define SMALLBIN_SIZE   0x100
 
 
 /// ---------------------------------
