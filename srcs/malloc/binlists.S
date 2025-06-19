@@ -5,12 +5,11 @@
 .type do_sized_malloc, %function
 .type pop_from_binlist, %function
 
-// (MALLOC_STRUCT)
+// (MALLOC_STRUCT, chunk size)
 do_sized_malloc:
     stp x29, x30, [sp, #-0x10]!
     mov x29, sp
 
-    mov x1, #FASTBIN_SIZE
     stp x0, x1, [sp, #-0x10]!
 
     ldr x2, [x0, #OFF_PAGE_SIZE]
