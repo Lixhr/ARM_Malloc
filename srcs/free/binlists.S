@@ -24,6 +24,24 @@ do_binlist_free:
     str xzr, [x1, #OFF_PREV] // curr->prev = NULL
 
     str x1, [x0] // update head
+
+    mov x0, x1
+    bl update_page_counter
+
 .ret:
+    ldp x29, x30, [sp], #0x10
+    ret
+
+
+update_page_counter:
+    stp x29, x30, [sp, #-16]!
+    mov x29, sp
+
+    bl get_page_base
+    ldr w1, [x0, #CHUNK_ALLOCATED]
+
+    sub w1, w1, #1
+    str w1, [x0, #CHUNK_ALLOCATED]
+
     ldp x29, x30, [sp], #0x10
     ret
