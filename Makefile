@@ -29,7 +29,8 @@ MALLOC_FILES 	= test.S \
 
 FREE_DIR 		= free/
 FREE_FILES		= free.S \
-				  binlists.S
+				  binlists.S \
+				  utils.S
 
 SRC_FILES = $(addprefix $(MALLOC_DIR), $(MALLOC_FILES))
 SRC_FILES += $(addprefix $(FREE_DIR), $(FREE_FILES))

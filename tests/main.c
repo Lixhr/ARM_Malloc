@@ -15,21 +15,19 @@ int main() {
     char *small[100] = {0};
 
 
-    for (size_t i = 0; i < 10; i ++) {
+    for (size_t i = 0; i < 5; i ++) {
         fasts[i] = ft_malloc(0x40);
         fill(fasts[i], 0x40, 'A');
 
-        small[i] = ft_malloc(0x170);
-        fill(small[i], 0x170, 'B');
+        small[i] = ft_malloc(0x70);
+        fill(small[i], 0x70, 'B');
     }
 
 
 
-    for (size_t i = 0; i < 10; i ++) {
+    for (size_t i = 0; i < 5; i ++) {
         ft_free(fasts[i]);
-
         ft_free(small[i]);
-
     }
 
 
